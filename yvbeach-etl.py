@@ -5,9 +5,9 @@
 
 
 import requests
-import re
 from bs4 import BeautifulSoup
 import os
+import re
 
 secret = os.environ.get('WINDY_API_KEY')
 

@@ -4,6 +4,7 @@ This is a work in progress.
 
 ## How to use
 1. Set your windy api key : `export WINDY_API_KEY=XXXXXXXXXXX`
+2. `pip3 install -r requirements.txt` (only for python)
 2. Run the script (sh or py)
 3. Set it up to run every minute to send the data to windy. 
 
