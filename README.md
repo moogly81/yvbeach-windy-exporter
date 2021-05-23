@@ -3,26 +3,31 @@ Gets the data from the greatest kitesurfing site inswitzerland : https://www.yvb
 This is a work in progress. 
 
 ## How to use
-1. Set your windy api key in your environment: `export WINDY_API_KEY=XXXXXXXXXXX`
-2. Run the script (sh or py)
-	- bash :
+1. Clone this repo
+2. Set your windy api key in your environment: `export WINDY_API_KEY=XXXXXXXXXXX`
+3. `docker compose up` 
+   
+ 3b. Alternatively, you can run the script :
+	- in bash :
 	
    ```
    ./yvbeach-etl.sh
    ```
-	- python :
+	- in python :
 	
    ```
    pip3 install -r requirements.txt
    ./yvbeach-etl.sh
    ```
    
-	- docker  :
+	- in docker  :
 	
    ```
    docker run --env WINDY_API_KEY=${WINDY_API_KEY} moogly81/yvbeach-windy-exporter:latest
    ``` 
-3. Set it up to run every minute to send the data to windy. 
+   
+
+4. Set it up to run every minute to send the data to windy. 
 
 
 ## Weird units used by windy custom api
