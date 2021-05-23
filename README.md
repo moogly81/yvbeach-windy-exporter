@@ -3,12 +3,27 @@ Gets the data from the greatest kitesurfing site inswitzerland : https://www.yvb
 This is a work in progress. 
 
 ## How to use
-1. Set your windy api key : `export WINDY_API_KEY=XXXXXXXXXXX`
-2. `pip3 install -r requirements.txt` (only for python)
+1. Set your windy api key in your environment: `export WINDY_API_KEY=XXXXXXXXXXX`
 2. Run the script (sh or py)
+	- bash :
+	
+   ```
+   ./yvbeach-etl.sh
+   ```
+	- python :
+	
+   ```
+   pip3 install -r requirements.txt
+   ./yvbeach-etl.sh
+   ```
+   
+	- docker  :
+	
+   ```
+   docker run --env WINDY_API_KEY=${WINDY_API_KEY} moogly81/yvbeach-windy-exporter:latest
+   ``` 
 3. Set it up to run every minute to send the data to windy. 
 
-I started in bash but aws lambda does not support bash, so I wrote it in python.
 
 ## Weird units used by windy custom api
 If I understood correctly, these ar the units used : 
