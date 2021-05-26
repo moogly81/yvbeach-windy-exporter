@@ -37,14 +37,14 @@ for line in output.splitlines():
                 print('pression =', p, "mbars")
             if re.match('VENT', line): 
                 a = re.sub('.*:([\d\.])', r'\1', line)
-                a = int(float(a)*10)
+                a = int(float(a)*100/36)
                 args+="&a="+str(a)
                 # I don't have minimum, I'll take it from the actual value
                 args+="&m="+str(a)
                 print('average =', a, "(in 10th of km/h...)")
             if re.match('RAFALE', line): 
                 g = re.sub('.*:([\d\.])', r'\1', line) 
-                g = int(float(g)*10)
+                g = int(float(g)*100/36)
                 args+="&g="+str(g)
                 print('max =', g, "in 10th of km/h...")
             if re.match('DIRECTION', line): 
@@ -66,7 +66,7 @@ for line in output.splitlines():
 
 dest_url="https://windyapp.co/apiV9.php?method=addCustomMeteostation"
 
-more_args="&i=YVONAND&secret="+secret
+more_args="&i=Yvonand&secret="+secret
 complete_url=dest_url+args+more_args
 print(complete_url)
 

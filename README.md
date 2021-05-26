@@ -1,6 +1,6 @@
 # yvbeach-windy-exporter
-Gets the data from the greatest kitesurfing site inswitzerland : https://www.yvbeach.com/yvmeteo.htm into the WINDY app. 
-This is a work in progress. 
+Gets the data from the one of the best kitesurfing site in switzerland https://www.yvbeach.com/yvmeteo.htm into the WINDY app. 
+
 
 ## How to use
 1. Clone this repo
@@ -8,19 +8,21 @@ This is a work in progress.
 3. `docker compose up` 
    
  3b. Alternatively, you can run the script :
-	- in bash :
+
+- in bash :
 	
    ```
-   ./yvbeach-etl.sh
-   ```
-	- in python :
-	
-   ```
-   pip3 install -r requirements.txt
    ./yvbeach-etl.sh
    ```
    
-	- in docker  :
+- in python :
+	
+   ```
+   pip3 install -r requirements.txt
+   ./yvbeach-etl.py
+   ```
+   
+- in docker  :
 	
    ```
    docker run --env WINDY_API_KEY=${WINDY_API_KEY} moogly81/yvbeach-windy-exporter:latest
