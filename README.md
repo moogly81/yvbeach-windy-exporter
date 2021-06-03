@@ -1,5 +1,5 @@
 # yvbeach-windy-exporter
-Gets the data from the one of the best kitesurfing site in switzerland https://www.yvbeach.com/yvmeteo.htm into the WINDY app. 
+Simple ETL to get data from the one of the best kitesurfing site in switzerland https:www.yvbeach.com/yvmeteo.htm  and load it into windy.app . 
 
 
 ## How to use
@@ -32,20 +32,39 @@ Gets the data from the one of the best kitesurfing site in switzerland https://w
 4. Set it up to run every minute to send the data to windy. 
 
 
-## Weird units used by windy custom api
-If I understood correctly, these ar the units used : 
+## Using the windy.app custom api
+Send your data with a **GET** request, with data as url arguments ...
+
+
+### Identification parameters 
+
+  - **i** :  device number (coordinate w/ the windy.app support team to insert the station into their DB)
+  - **secret** :  XXXXXXX (get this from the windy.app support team)
+
+
+### Mandatory parameters 
+
+
+  - **d5** : direction from 0 to 1024. Clockwise. North is 0. Direction in degrees = (d5/1024)*360
+  - **a** :  average wind per sending interval. In 10th of m/s  (for m/s - divide by 10)
+  - **m** : minimal wind per sending interval. In 10th of m/s  (for m/s - divide by 10)
+  -  **g** : maximum wind per sending interval. In 10th of m/s  (for m/s - divide by 10)
+
+
+### Optional parameters 
+
+  - **accum** : external potential. In 10th of V. (for V - divide by 10)
+  - **p** : pressure in mbar or hPa
+  - **thc** : temperature of internal pressure sensor, in 10th of degrees celsius
+  - **te2** : temperature of the external temperature sensor, in 10th of degrees celsius
+  - **b** : internal tension. In 100th of V  (for volts - divide by 100)
+  - **h** : humidity, in % 
+
+
+Example  of a complete request: 
 
 ```
-//d5* - direction from 0 to 1024. direction in degrees is equal = (d5/1024)*360
-//accum - external potential. should be divided by 10 to convert into voltage
-//p- pressure in mbar or hPa
-//thc - temperature of internal pressure sensor (this sensor is not installed in 0099)
-//te2 - temperature of the external temperature sensor
-//a* - average wind per sending interval. for m/c - divide by 10 (what is m/c ? does that mean it is in 10cm/sec)
-//m* - minimal wind per sending interval. for m/c - divide by 10
-//g* - maximum wind per sending interval. for m/c - divide by 10
-//i* - device number
-//b - internal tension. In 100th of V  (for volts - divide by 100)
-//h - humidity, if sensor is installed in % 
-//secret= XXXXXXX
+GET https://windyapp.co/apiV9.php?method=addCustomMeteostation&p=1015&g=290&a=124&m=124&d5=568&thc=88&i=yvonand&secret=XXXXXX
 ```
+
+
