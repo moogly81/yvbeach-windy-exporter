@@ -5,13 +5,14 @@ Simple ETL to get data from the one of the best kitesurfing site in switzerland 
 ## How to use
 1. Clone this repo
 2. Set your windy api key in your environment: `export WINDY_API_KEY=XXXXXXXXXXX`
-3. `docker compose up` 
+3. `cd python; docker compose up` 
    
  3b. Alternatively, you can run the script :
 
 - in bash :
 	
    ```
+   cd bash
    ./yvbeach-etl.sh
    ```
    
