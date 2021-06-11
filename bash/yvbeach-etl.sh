@@ -2,10 +2,9 @@
 
 # This script transforms the Yvonand beach meteo page to import them into windy.
 # The api is easy. Send a single get request with all parameters (including the secret , LOL)
-
 set -euo pipefail
 
-raw_html=$(curl "https://www.yvbeach.com/yvmeteo.htm")
+raw_html=$(curl -s "https://www.yvbeach.com/yvmeteo.htm")
 
 
 #comes from environment
@@ -66,5 +65,7 @@ ARGS+="&d5=$d5"
 h=$(echo "$raw_html" | grep HUMIDITE| sed 's/^.*nbsp; \(.*\) %.*/\1/')
 ARGS+="&h=$h"
 
-
-curl  "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS"
+echo sending data to windy :
+echo    "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS"
+curl -s "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS"
+echo

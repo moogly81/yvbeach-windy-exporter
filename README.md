@@ -5,7 +5,7 @@ Simple ETL to get data from the one of the best kitesurfing site in switzerland 
 ## How to use
 1. Clone this repo
 2. Set your windy api key in your environment: `export WINDY_API_KEY=XXXXXXXXXXX`
-3. `cd python; docker compose up` 
+3. `cd bash; docker compose up -d` 
    
  3b. Alternatively, you can run the script :
 
@@ -19,6 +19,7 @@ Simple ETL to get data from the one of the best kitesurfing site in switzerland 
 - in python :
 	
    ```
+   cd python
    pip3 install -r requirements.txt
    ./yvbeach-etl.py
    ```
@@ -30,7 +31,7 @@ Simple ETL to get data from the one of the best kitesurfing site in switzerland 
    ``` 
    
 
-4. Set it up to run every minute to send the data to windy. 
+4. The container uses crond to send the data every minute
 
 
 ## Using the windy.app custom api
