@@ -27,35 +27,41 @@ ARGS+="&i=$i"
 
 
 #  p- pressure in mbar
-p=$(echo "$raw_html" | grep PRESSION| sed 's/^.*nbsp; \(.*\) mb .*/\1/')
-p=$(echo "$p/1" | bc)
+p_=$(echo "$raw_html" | grep PRESSION| sed 's/^.*nbsp; \(.*\) mb .*/\1/')
+p=$(echo "$p_/1" | bc)
+echo "Measured pressure : $p mbars"
 ARGS+="&p=$p"
 
 #  thc - temperature of internal pressure sensor, in tenth of degrees
-thc=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
-thc=$(echo "$thc * 10/1" | bc)
+thc_=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
+thc=$(echo "$thc_ * 10/1" | bc)
+echo "Measured temperature : $thc_ degrees,  reported as $thc"
 ARGS+="&thc=$thc"
 
 #  te2 - température of the external temperature sensor
 
 #  a* - average wind per sending interval in dm/s. for m/s - divide by 10
-a=$(echo "$raw_html" | grep VENT| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
-a=$(echo "$a * 100/36" | bc)
+a_=$(echo "$raw_html" | grep VENT| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
+a=$(echo "$a_ * 100/36" | bc)
+echo "Measured wind (avg) : $a_ km/h,  reported as $a dm/s"
 ARGS+="&a=$a"
 
 #  m* - minimal wind per sending interval in dm/s. for m/s - divide by 10
 # I don't have that, I'm taking the average ...
 m=$a
 ARGS+="&m=$m"
+echo "Measured wind (min) : $a_ km/h,  reported as $a dm/s"
 
 #  g* - maximum wind per sending interval in dm/s. for m/s - divide by 10
-g=$(echo "$raw_html" | grep RAFALE| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
-g=$(echo "$g * 100/36" | bc)
+g_=$(echo "$raw_html" | grep RAFALE| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
+g=$(echo "$g_ * 100/36" | bc)
+echo "Measured wind (max) : $g_ km/h,  reported as $g dm/s"
 ARGS+="&g=$g"
 
 # d5- direction from 0 to 1024. direction in degrees is equal = (d5/1024)*360
-d5=$(echo "$raw_html" | grep DIRECTION| sed 's/^.*nbsp; \(.*\)\&deg.*/\1/')
-d5=$(( d5 * 1024/360))
+d5_=$(echo "$raw_html" | grep DIRECTION| sed 's/^.*nbsp; \(.*\)\&deg.*/\1/')
+d5=$(( d5_ * 1024/360))
+echo "Measured wind direction : $d5_ degrees,  reported as $d5"
 ARGS+="&d5=$d5"
 
 #  b - internal tension. for volts - divide by 100
@@ -64,8 +70,9 @@ ARGS+="&d5=$d5"
 #  h - humidity
 h=$(echo "$raw_html" | grep HUMIDITE| sed 's/^.*nbsp; \(.*\) %.*/\1/')
 ARGS+="&h=$h"
+echo "Measured humidity : $h%"
 
-echo sending data to windy :
-echo    "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS"
+echo "sending data to windy (the secret is hidden in the log):"
+echo    "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS" |sed 's/secret=[[:alnum:]]*/secret=XXXXXXX/'   
 curl -s "https://windyapp.co/apiV9.php?method=addCustomMeteostation&$ARGS"
 echo
