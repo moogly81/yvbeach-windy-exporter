@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # This script transforms the Yvonand beach meteo page to import them into windy.
 # The api is easy. Send a single get request with all parameters (including the secret , LOL)
 

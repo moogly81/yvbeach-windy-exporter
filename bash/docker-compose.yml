@@ -1,7 +1,8 @@
-version: '3.9'
+version: '3'
 services:
   windy-yvbeach:
     build: .
     environment:
       WINDY_API_KEY:
+    restart: always
 
