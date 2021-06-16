@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   exporter:
+    build: .
     image: "moogly81/yvbeach-windy-exporter:latest"
     environment: 
         WINDY_API_KEY:

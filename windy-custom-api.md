@@ -9,8 +9,9 @@ Send your data with a **GET** request, with data as url arguments.
   - **secret** :  XXXXXXX (get this from the windy.app support team)
 
 
-### Mandatory parameters 
 
+### Mandatory parameters 
+All parameters are integers.
 
   - **d5** : direction from 0 to 1024. Clockwise. North is 0. Direction in degrees = (d5/1024)*360
   - **a** :  average wind per sending interval. In 10th of m/s  (for m/s - divide by 10)
@@ -19,11 +20,12 @@ Send your data with a **GET** request, with data as url arguments.
 
 
 ### Optional parameters 
+All parameters are integers.
 
   - **accum** : external potential. In 10th of V. (for V - divide by 10)
-  - **p** : pressure in mbar or hPa
-  - **thc** : temperature of internal pressure sensor, in 10th of degrees celsius
-  - **te2** : temperature of the external temperature sensor, in 10th of degrees celsius
+  - **p** : pressure in mbar 
+  - **thc** : temperature of internal pressure sensor, in degrees celsius
+  - **te2** : temperature of the external temperature sensor, in degrees celsius
   - **b** : internal tension. In 100th of V  (for volts - divide by 100)
   - **h** : humidity, in % 
 

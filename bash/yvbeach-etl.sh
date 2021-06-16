@@ -32,13 +32,13 @@ p=$(echo "$p_/1" | bc)
 echo "Measured pressure : $p mbars"
 ARGS+="&p=$p"
 
-#  thc - temperature of internal pressure sensor, in tenth of degrees
-thc_=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
-thc=$(echo "$thc_ * 10/1" | bc)
-echo "Measured temperature : $thc_ degrees,  reported as $thc"
-ARGS+="&thc=$thc"
-
 #  te2 - température of the external temperature sensor
+te2_=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
+te2=$(echo "$te2_/1" | bc)
+echo "Measured temperature : $te2_ degrees,  reported as $te2"
+ARGS+="&te2=$te2"
+
+#  thc - temperature of internal pressure sensor, in tenth of degrees
 
 #  a* - average wind per sending interval in dm/s. for m/s - divide by 10
 a_=$(echo "$raw_html" | grep VENT| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
