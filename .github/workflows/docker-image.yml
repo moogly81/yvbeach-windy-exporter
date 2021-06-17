@@ -20,6 +20,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: moogly81/yvbeach-windy-exporter
 
       - name: Set up Docker Buildx
         id: buildx
@@ -32,7 +38,8 @@ jobs:
           context: ./bash/
           file: ./bash/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/yvbeach-windy-exporter:latest
+          #tags: ${{ secrets.DOCKER_HUB_USERNAME }}/yvbeach-windy-exporter:latest
+          tags: ${{ steps.meta.outputs.tags }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
