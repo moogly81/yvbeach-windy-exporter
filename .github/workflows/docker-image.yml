@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./bash/
-          file: ./Dockerfile
+          file: ./bash/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/yvbeach-windy-exporter:latest
 
