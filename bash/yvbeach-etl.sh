@@ -4,8 +4,13 @@
 # The api is easy. Send a single get request with all parameters (including the secret , LOL)
 set -euo pipefail
 
-raw_html=$(curl -s "https://www.yvbeach.com/yvmeteo.htm")
+# This is necessary to wait for the page to be fetched ...
+sleep 10
 
+#raw_html=$(cat yvmeteo.htm)
+echo "INFO : windy.app export"
+
+raw_html=$(cat "/tmp/yvmeteo.htm")
 
 #comes from environment
 if  [ -z ${WINDY_API_KEY+x} ]; then 
