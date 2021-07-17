@@ -1,3 +1,4 @@
 .git
 raw.htm
 .windy-api-key.env
+.env
