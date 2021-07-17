@@ -34,11 +34,11 @@ te2=$(echo "$te2_/1" | bc)
 
 #  a* - average wind per sending interval in dm/s. for m/s - divide by 10
 a_=$(echo "$raw_html" | grep VENT| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
-wind=$(echo "$a_ * 10/3.6" | bc)
+wind=$(echo "$a_ /3.6" | bc)
 
 #  g* - maximum wind per sending interval in dm/s. for m/s - divide by 10
 g_=$(echo "$raw_html" | grep RAFALE| sed 's/^.*nbsp; \(.*\) km\/h.*/\1/')
-gust=$(echo "$g_ * 10/3.6" | bc)
+gust=$(echo "$g_ /3.6" | bc)
 
 # d5- direction from 0 to 1024. direction in degrees is equal = (d5/1024)*360
 d5_=$(echo "$raw_html" | grep DIRECTION| sed 's/^.*nbsp; \(.*\)\&deg.*/\1/')
