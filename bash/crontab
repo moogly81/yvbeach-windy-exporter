@@ -1,5 +1,5 @@
-*  *  *  *  *     curl https://www.yvbeach.com/yvmeteo.htm >/tmp/yvmeteo.htm
-*  *  *  *  *     /yvbeach-etl.sh
+*  *  *  *  *     curl -s https://www.yvbeach.com/yvmeteo.htm >/tmp/yvmeteo.htm && echo "INFO : Html fetched" || echo "ERROR : curl command failed"
+*  *  *  *  *     /yvbeach-etl-windy-app.sh
 *  *  *  *  *     /yvbeach-etl-wunderground.sh
 */5  *  *  *  *   /yvbeach-etl-windy-com.sh
-# This file must end with empty line
+# crontab must end with empty line
