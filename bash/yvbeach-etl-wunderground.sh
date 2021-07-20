@@ -4,6 +4,14 @@
 # The api is easy. Send a single get request with all parameters (including the secret , LOL)
 set -eo pipefail
 
+
+#comes from environment
+if  [ -z ${WUNDERGROUND_STATION_PASSWORD+x} ]; then
+    echo "Please set up your api key : "
+    echo "export WUNDERGROUND_STATION_PASSWORD=XXXXXXXXXX"
+    exit 1
+fi
+
 # This is necessary to wait for the page to be fetched ...
 sleep 13
 
@@ -17,7 +25,9 @@ p_=$(echo "$raw_html" | grep PRESSION| sed 's/^.*nbsp; \(.*\) mb .*/\1/')
 p=$(echo "$p_/1" | bc)
 
 #  te2 - température of the external temperature sensor
-te2_=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
+temp_celsius=$(echo "$raw_html" | grep TEMPERATURE| sed 's/^.*nbsp; \(.*\)\&deg.*deg.*/\1/')
+tempf=$(echo "scale=1; $temp_celsius *9/5 + 32" | bc)
+echo tempf=$tempf
 
 #  thc - temperature of internal pressure sensor, in tenth of degrees
 
@@ -38,7 +48,7 @@ d5_=$(echo "$raw_html" | grep DIRECTION| sed 's/^.*nbsp; \(.*\)\&deg.*/\1/')
 #  h - humidity
 h=$(echo "$raw_html" | grep HUMIDITE| sed 's/^.*nbsp; \(.*\) %.*/\1/')
 
-url="https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=IYVONA1&PASSWORD=ujfzEJby&dateutc=now&winddir=$d5_&windspeedmph=$windspeedmph&windgustmph=$windgustmph&humidity=$h&action=updateraw" 
+url="https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=IYVONA1&PASSWORD=$WUNDERGROUND_STATION_PASSWORD&dateutc=now&winddir=$d5_&windspeedmph=$windspeedmph&windgustmph=$windgustmph&humidity=$h&tempf=$tempf&action=updateraw" 
 echo "INFO : Wunderground : sending data (the secret is hidden in the log):"
 echo "INFO : command :  $url" |sed 's/PASSWORD=[[:alnum:]]*/PASSWORD=XXXXXXX/'   
 curl "$url" 
